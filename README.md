@@ -1,12 +1,14 @@
 # notebook_xterm
-A fully-functional terminal emulator in an IPython/Jupyter notebook. This is useful for notebook environments that don't provide shell access. Uses [xterm.js](https://xtermjs.org) for a VT100-compliant Javascript terminal. Instead of an actual WebSocket, the notebook uses the Javascript Jupyter cell execute function `Jupyter.notebook.kernel.execute()` as a channel to communicate between the Python runtime on the server (`TerminalServer`) and JavaScript runtime in the browser (`TerminalClient`).
+A fully-functional terminal emulator in an IPython/Jupyter notebook. This is useful for notebook environments that don't provide shell access. Uses [xterm.js](https://xtermjs.org) for a VT100-compliant Javascript terminal front-end component. Instead of an actual WebSocket, notebook_xterm uses the Javascript Jupyter cell execute function `Jupyter.notebook.kernel.execute()` as a channel to communicate between the Python runtime on the server (`TerminalServer`) and JavaScript runtime in the browser (`TerminalClient`).
 
 ![jupyter-nb-terminal-emulator-demo](https://user-images.githubusercontent.com/1238730/32994956-04cb26da-cd3c-11e7-9f7c-527de15f654c.gif)
 
 ## Getting Started
+Link to an [Example notebook](example.ipynb).
+
 Check out [IBM Data Science Experience](https://datascience.ibm.com/) for a free, managed data science platform that includes a Jupyter notebook server.
 
-Link to an [Example notebook](example.ipynb)
+----
 
 From within an IPython notebook (Python 3), install the package using pip:
 ```
