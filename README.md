@@ -10,15 +10,18 @@ Link to an [Example notebook](example.ipynb)
 
 From within an IPython notebook (Python 3), install the package using pip:
 ```
-!pip install notebook_xterm```
+!pip install notebook_xterm
+```
 
 Load the IPython extension. You'll need to reload the extension each time the notebook kernel starts. Alternatively, you can add notebook_xterm to the [configuration file](http://ipython.readthedocs.io/en/stable/config/extensions/index.html#using-extensions) to load it automatically.
 ```
-%load_ext notebook_xterm```
+%load_ext notebook_xterm
+```
 
 To display a terminal, type the [magic function](http://ipython.readthedocs.io/en/stable/interactive/magics.html) `%xterm` in a blank cell:
 ```
-%xterm```
+%xterm
+```
 
 ## Tested Environments
 + Python 3
