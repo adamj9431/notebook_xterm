@@ -1,3 +1,6 @@
+from __future__ import (absolute_import, division,
+                        print_function, unicode_literals)
+
 import pty, os, tty, termios, time, sys, base64, struct, signal
 from fcntl import fcntl, F_GETFL, F_SETFL, ioctl
 
@@ -13,7 +16,11 @@ class TerminalServer:
             tty.setraw(self.fd, termios.TCSANOW)
 
             #open the shell process file descriptor as read-write
-            self.file = os.fdopen(self.fd,'wb+', buffering=0)
+            if sys.version_info >= (3, 0):
+                self.file = os.fdopen(self.fd,'wb+', buffering=0)
+            else:
+                #python 2 compatible code
+                self.file = os.fdopen(self.fd,'wb+', 0)
 
             #set the file reads to be nonblocking
             flags = fcntl(self.file, F_GETFL)

@@ -128,6 +128,7 @@ TerminalClient.prototype.receive_data_callback = function(data) {
         if (data.content.ename && data.content.evalue) {
             message += data.content.ename + ": " + data.content.evalue + "\r\n";
             data.content.traceback.map(function(row){
+                row = row.replace('\n', '\r\n')
                 message += row + '\r\n';
             });
         } else {
