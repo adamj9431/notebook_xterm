@@ -76,6 +76,7 @@ TerminalClient.prototype.create_ui = function(elem) {
     })
     this.titleText = $('<div>').html(INITIAL_TITLE).css({float: 'left'}).appendTo(this.titleBar);
     this.comIndicator = $('<div>').html('&middot;').css({float: 'left', marginLeft: 10}).hide().appendTo(this.titleBar);
+    this.close_button = $('<div>').html('<a onclick="window.terminalClient.close()">close</a>').css({float: 'right'}).appendTo(this.titleBar);
     this.termArea = $('<div>').appendTo(this.wrap);
     return this.termArea;
 }
