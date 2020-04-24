@@ -170,6 +170,7 @@ TerminalClient.prototype.close = function() {
     console.log('Closing notebook_xterm.');
     clearTimeout(this.termPollTimer);
     this.server_exec(PY_XTERM_INSTANCE + '.deleteTerminalServer()');
+    $('#notebook_xterm').remove()
     this.closed = true;
 }
 // create the TerminalClient instance (only once!)
