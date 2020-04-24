@@ -26,6 +26,9 @@ class TerminalServer:
             flags = fcntl(self.file, F_GETFL)
             fcntl(self.file, F_SETFL, flags | os.O_NONBLOCK)
 
+    def initial_transmit(self):
+        self.transmit(base64.b64encode(self.initial_command))
+
     def transmit(self,data):
         # data in the "channel" is b64 encoded so that control characters
         # don't get lost
