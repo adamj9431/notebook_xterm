@@ -13,6 +13,7 @@ function TerminalClient(elem) {
     });
 
     require(['xterm'], function(Terminal) {
+        this.div_id = elem.attr('id')
         var termArea = this.create_ui(elem);
         this.term = new Terminal({
             rows: 25,
@@ -171,11 +172,10 @@ TerminalClient.prototype.close = function() {
     console.log('Closing notebook_xterm.');
     clearTimeout(this.termPollTimer);
     this.server_exec(PY_XTERM_INSTANCE + '.deleteTerminalServer()');
-    $('#notebook_xterm').remove()
-    
+    $("#" + this.div_id).remove()
 }
 // create the TerminalClient instance (only once!)
 if (window.terminalClient) {
+    window.terminalClient.close()
     delete window.terminalClient;
 }
-window.terminalClient = new TerminalClient($('#notebook_xterm'))
