@@ -5,6 +5,8 @@ import os
 from .terminalserver import TerminalServer
 from IPython.core.display import display, HTML
 from IPython.core.magic import (Magics, magics_class, line_magic, cell_magic)
+from base64 import b64encode
+from uuid import uuid4
 
 JS_FILE_NAME = 'terminalclient.js'
 
@@ -17,11 +19,18 @@ class Xterm(Magics):
         with open(jsPath) as f:
             terminalClient_js = f.read()
 
-        markup = """
-        <div id="notebook_xterm"></div>
-        <script>{0}</script>
-        """.format(terminalClient_js)
+        unique_id = str(uuid4())
+        markup = f"""
+        <div id="notebook_xterm_{unique_id}"></div>
+        <script id="notebook_script">{terminalClient_js}
+
+        window.terminalClient = new TerminalClient($('#notebook_xterm_{unique_id}'))
+        </script>
+        """
         display(HTML(markup))
+        ts = self.getTerminalServer()
+
+        return self.getTerminalServer()
 
     def getTerminalServer(self):
         try:
