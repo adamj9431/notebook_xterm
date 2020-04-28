@@ -3,6 +3,15 @@ var MIN_POLL_INTERVAL = 100;
 var BACKOFF_RATE = 1.8;
 var PY_XTERM_INSTANCE = 'get_ipython().find_magic("xterm").__self__';
 var PY_TERMINAL_SERVER = PY_XTERM_INSTANCE + '.getTerminalServer()';
+
+function b64DecodeUnicode(str) {
+    // From https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+}
+
 function TerminalClient(elem) {
     this.closed = false;
     // require xterm.js
@@ -120,7 +129,7 @@ TerminalClient.prototype.receive_data_callback = function(data) {
     }
 
     try {
-        var decoded = atob(data.content.text);
+        var decoded = b64DecodeUnicode(data.content.text);
         this.term.write(decoded);
     }
     catch(e) {
