@@ -27,6 +27,11 @@ To display a terminal, type the [magic function](http://ipython.readthedocs.io/e
 %xterm
 ```
 
+To display a terminal and immediately run a command in it, just place the command after the `%xterm` call:
+```
+%xterm ls
+```
+
 ## Tested Environments
 + [IBM Data Science Experience](https://datascience.ibm.com/)
 + Jupyter 4.3.0
