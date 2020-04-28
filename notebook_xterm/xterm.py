@@ -5,12 +5,8 @@ import os
 from .terminalserver import TerminalServer
 from IPython.core.display import display, HTML
 from IPython.core.magic import (Magics, magics_class, line_magic, cell_magic)
-<<<<<<< HEAD
-=======
-import time
 from base64 import b64encode
 from uuid import uuid4
->>>>>>> fb13e00... Use unique ID for each notebook_xterm div, so we can have multiple divs at a time
 
 JS_FILE_NAME = 'terminalclient.js'
 
