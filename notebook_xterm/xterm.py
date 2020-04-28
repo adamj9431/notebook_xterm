@@ -5,6 +5,8 @@ import os
 from .terminalserver import TerminalServer
 from IPython.core.display import display, HTML
 from IPython.core.magic import (Magics, magics_class, line_magic, cell_magic)
+import time
+from base64 import b64encode
 
 JS_FILE_NAME = 'terminalclient.js'
 
@@ -19,9 +21,14 @@ class Xterm(Magics):
 
         markup = """
         <div id="notebook_xterm"></div>
-        <script>{0}</script>
+        <script id="notebook_script">{0}</script>
         """.format(terminalClient_js)
         display(HTML(markup))
+        ts = self.getTerminalServer()
+        ts.initial_command = bytes(line, encoding="utf-8") + b"\r"
+
+        return self.getTerminalServer()
+        #ts.transmit(b64encode(b"ls"))
 
     def getTerminalServer(self):
         try:
