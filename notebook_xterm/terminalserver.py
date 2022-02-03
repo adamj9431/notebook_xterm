@@ -37,7 +37,7 @@ class TerminalServer:
             data = os.read(self.fd, 8192)
         except OSError:
             data = b''
-        sys.stdout.write(base64.b64encode(data))
+        sys.stdout.write(base64.b64encode(data).decode('utf-8'))
 
     def update_window_size(self, rows, cols):
         #notify that the pty size should change to match xterm.js
