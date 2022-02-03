@@ -120,7 +120,7 @@ TerminalClient.prototype.receive_data_callback = function(data) {
     }
 
     try {
-        var decoded = atob(data.content.text);
+        var decoded = decodeURIComponent(escape(window.atob(data.content.text)));
         this.term.write(decoded);
     }
     catch(e) {
@@ -147,7 +147,7 @@ TerminalClient.prototype.handle_transmit = function(data) {
     this.curPollInterval = MIN_POLL_INTERVAL;
 
     // transmit data to the server, but b64 encode it
-    this.server_exec(PY_TERMINAL_SERVER + '.transmit(b"' + btoa(data) + '")');
+    this.server_exec(PY_TERMINAL_SERVER + '.transmit(b"' + btoa(unescape(encodeURIComponent(data))) + '")');
 }
 
 TerminalClient.prototype.handle_resize = function() {
